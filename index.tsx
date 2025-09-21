@@ -2,8 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 import { GoogleGenAI } from "@google/genai";
 
-// Initialize the Google Gemini AI client
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// IMPORTANT: Replace "YOUR_API_KEY_HERE" with your actual Google AI API key.
+// This key will be visible to anyone who visits your website. For a public site,
+// it is strongly recommended to use a serverless function to protect your key.
+const API_KEY = "YOUR_API_KEY_HERE";
+const ai = new GoogleGenAI({ apiKey: API_KEY });
 
 const LANGUAGES = [
     { name: 'English (US)', code: 'en-US' },
@@ -29,7 +32,7 @@ const App = () => {
     const [pronunciations, setPronunciations] = useState('');
     const [pronunciationMap, setPronunciationMap] = useState(new Map());
     const [lines, setLines] = useState<{ character: string; dialogue: string; direction: string; }[]>([]);
-    const [characters, setCharacters] = useState([]);
+    const [characters, setCharacters] = useState<string[]>([]);
     const [selectedCharacter, setSelectedCharacter] = useState('');
     const [isPracticing, setIsPracticing] = useState(false);
     const [currentLineIndex, setCurrentLineIndex] = useState(0);
@@ -307,6 +310,10 @@ const App = () => {
     }, [isPracticing, currentLineIndex]);
     
     const handleAnalysis = async (type: 'character' | 'scene') => {
+        if (API_KEY === "YOUR_API_KEY_HERE") {
+            alert("Please add your Google AI API key to the index.tsx file to use this feature.");
+            return;
+        }
         if (!script) return alert('Please paste a script first.');
         setIsLoadingAnalysis(true);
         setIsAnalysisModalOpen(true);
