@@ -1,0 +1,7 @@
+{
+  "name": "Line Learner",
+  "description": "A voice dialogue assistant to help actors learn their lines. Developed by Actor Ashwin Mushran",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
