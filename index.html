@@ -21,7 +21,7 @@
   </head>
   <body>
     <div id="root"></div>
-    <!-- Change script type to text/babel to be processed by the transpiler -->
-    <script type="text/babel" data-type="module" src="index.tsx"></script>
+    <!-- Explicitly set presets for Babel to ensure TSX is always transpiled -->
+    <script type="text/babel" data-presets="typescript,react" data-type="module" src="index.tsx"></script>
   </body>
 </html>
